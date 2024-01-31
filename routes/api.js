@@ -3,13 +3,15 @@ const router = express.Router();
 const fs = require('fs');
 
 const dbData = require('../db/db.json');
+const {v4: uuid} = require('uuid');
 
 router
     .route('/notes')
-    .get('/notes', (req, res) => {
-        res.status(200).json(dbData);
+    .get((req, res) => {
+        readFromFile('../db/db.json').then((dbData) => res.json(JSON.parse(dbData)));
+        // res.status(200).json(dbData);
     })
-    .post('/notes', (req, res) => {
+    .post((req, res) => {
         const { title, text } = req.body;
         console.log(title, text);
         if (!title && !text) {
@@ -17,21 +19,21 @@ router
         }
 
         const newNote = {
-            id: uuidv4(),
+            id: uuid(),
             text,
             title
         }
 
         dbData.push(newNote);
 
-        writeFile('./db/db.json', JSON.stringify(dbData))
+        fs.writeFile('./db/db.json', JSON.stringify(dbData), (err) => {})
             .then(() => res.status(200).json(newNote))
             .catch((error) => {
                 console.log(error)
                 res.status(500).json({ msg: "try again" })
             })
         try {
-            writeFile('./db/db.json', JSON.stringify(dbData))
+            fs.writeFile('./db/db.json', JSON.stringify(dbData), (err) => {})
             res.status(200).json(newNote);
         }
         catch (error) {
@@ -40,9 +42,9 @@ router
         }
     })
 
-router.route('notes/:id') {
-    
-}
-    
+// router.route('notes/:id') {
+
+// }
+
 
 module.exports = router;

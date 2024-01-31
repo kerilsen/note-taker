@@ -4,7 +4,7 @@ const path = require('path');
 
 const fs = require('fs');
 // Helper method for generating unique ids
-const uuid = require('uuid');
+const { v4: uuid } = require('uuid');
 
 router.get('/', (req, res) => res.sendFile(path.join(__dirname, '../public/notes.html')));
 
@@ -35,7 +35,7 @@ router.post('/', (req, res) => {
         };
 
         // Obtain existing notes
-        fs.readFile('../db/db.json', 'utf8', (err, data) => {
+        fs.readFile('./db/db.json', 'utf8', (err, data) => {
             if (err) {
                 console.error(err);
             } else {
@@ -47,7 +47,7 @@ router.post('/', (req, res) => {
 
                 // Write updated reviews back to the file
                 fs.writeFile(
-                    '../db/db.json',
+                    './db/db.json',
                     JSON.stringify(parsedNotes, null, 3),
                     (writeErr) =>
                         writeErr
@@ -61,7 +61,7 @@ router.post('/', (req, res) => {
             status: 'success',
             body: newNote,
         };
-        
+
         console.log(response);
         res.status(201).json(response);
     } else {
