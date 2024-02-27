@@ -1,19 +1,17 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 const path = require('path');
 
-const fs = require('fs');
+// const fs = require('fs');
 // Helper method for generating unique ids
-const uuid = require('uuid');
+// const uuid = require('uuid');
 
-router.get('/', (req, res) => res.sendFile(path.join(__dirname, '../public/notes.html')));
+// router.get('/', (req, res) => res.sendFile(path.join(__dirname, '../public/notes.html')));
 
 // GET request for notes
 router.get('/', (req, res) => {
-    // Send a message to the client
-    res.status(200).json(`${req.method} request received to get notes`);
+    res.sendFile(path.join(__dirname, '../public/notes.html'))
 
-    // Log our request to the terminal
+    // Log request to the terminal
     console.info(`${req.method} request received to get notes`);
 })
 
@@ -35,7 +33,7 @@ router.post('/', (req, res) => {
         };
 
         // Obtain existing notes
-        fs.readFile('../db/db.json', 'utf8', (err, data) => {
+        fs.readFile('./db/db.json', 'utf8', (err, data) => {
             if (err) {
                 console.error(err);
             } else {
@@ -47,7 +45,7 @@ router.post('/', (req, res) => {
 
                 // Write updated reviews back to the file
                 fs.writeFile(
-                    '../db/db.json',
+                    './db/db.json',
                     JSON.stringify(parsedNotes, null, 3),
                     (writeErr) =>
                         writeErr
