@@ -16,24 +16,24 @@ const createNote = async (req, res) => {
     console.info(`${req.method} request to create a note with title: ${title} and text: ${text}`);
 
     if (title && text) {
-    // Variable for the object we will save
-    const newNote = {
-    id: uuidv4(),
-    title,
-    text
-    };
+        // Variable for the object we will save
+        const newNote = {
+            id: uuidv4(),
+            title,
+            text
+        };
 
-    // Push newNote to the json file
-    dbData.push(newNote);
-    try {
-        await writeFile('./db/db.json', JSON.stringify(dbData));
-        res.status(200).json(newNote);
-    }
-    catch (error) {
-        console.log(error);
-        res.status(500).json({ msg: "Unable to write to database" });
-    }
-    return;
+        // Push newNote to the json file
+        dbData.push(newNote);
+        try {
+            await writeFile('./db/db.json', JSON.stringify(dbData));
+            res.status(200).json(newNote);
+        }
+        catch (error) {
+            console.log(error);
+            res.status(500).json({ msg: "Unable to write to database" });
+        }
+        return;
     }
     res.status(400).json({ message: 'You need to enter your note first' });
     return;
@@ -41,21 +41,17 @@ const createNote = async (req, res) => {
 
 const deleteNote = (req, res) => {
     const noteId = req.params;
-    console.log(noteId);
-    for (const i in dbData) {
-        const note = dbData[i];
-        console.log(`note is ${note} and note.id is ${note.id}`);
-        if (noteId === note.id) {
-            dbData.splice(i, 1);
-            try {
-                writeFile('./db/db.json', JSON.stringify(dbData));
-                res.status(200).json({message: `Your note has been deleted`});
-            } catch (error) {
-                res.status(500).json({ message: `Unable to delete note` });
-            }
-        }
-    }
-    res.status(200).json({message: `No such note exists`});
+    console.log(`noteID is ${noteId} and dbData.id is ${dbData.id}`);
+    // Make a new array of all tips except the one with the ID provided in the URL
+
+    const result = dbData.filter((note) => note.id !== noteId);
+    console.log(result);
+    // try {
+    //     writeFile('./db/db.json', result);
+    //     res.status(200).json({ message: `Your note has been deleted` });
+    // } catch (error) {
+    //     res.status(500).json({ message: `Unable to delete note` });
+    // }
 };
 
 module.exports = {
