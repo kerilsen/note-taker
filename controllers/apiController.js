@@ -39,7 +39,7 @@ const createNote = async (req, res) => {
     return;
 };
 
-// Function to delete a note when the affiliated 'trash' button is clicked
+// Function to delete a note when the 'trash' button is clicked
 const deleteNote = async (req, res) => {
     const noteId = req.params.id;
 
