@@ -6,7 +6,7 @@
 
   GitHub repository: [Note-taker](https://github.com/kerilsen/note-taker)
 
-  Deployed link: [Keri Note Taker](https://keri-note-taker-c8ddb533c64b.herokuapp.com/)
+  Deployed link: [Note Taker](https://keri-note-taker-c8ddb533c64b.herokuapp.com/)
 
   This is a simple application that can be used to write and save notes. It could be used to keep track of personal tasks and errands. You are able to delete a task using the 'trash can' icon that is next to it, but right now you must refresh the page to see that it  has taken effect.
 
