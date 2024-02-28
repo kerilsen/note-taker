@@ -24,9 +24,9 @@
   Simply load the URL [here](https://keri-note-taker-c8ddb533c64b.herokuapp.com/) and hit the 'Get Started' button.
 
   ## Usage
-  ![Screenshot of landing page](./assets/images/landing-page.png)
+  ![Screenshot of landing page](./public/assets/images/landing-page.png)
   After clicking the "Get Started button", you are taken to the notes page that shows you saved notes and allows you to enter your own. Type in your title and text as shown in the screenshot and hit save.
-  ![Screenshot of notes page](./assets/images/notes.png)
+  ![Screenshot of notes page](./public/assets/images/notes.png)
 
   ## Contributing
 
