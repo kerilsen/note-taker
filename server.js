@@ -14,7 +14,7 @@ app.use('/', mainRouter);
 function logger(req, res, next) {
     console.log(req.originalUrl);
     next();
-}
+};
 
 app.listen(PORT, () =>
 console.log(`App listening at http://localhost:${PORT}`)
